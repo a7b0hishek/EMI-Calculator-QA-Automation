@@ -94,4 +94,4 @@ CodeX assisted with building and reviewing the dashboard and automation framewor
 
 Some work needed environment-specific adjustments: Playwright's browser download was blocked, so installed Google Chrome was used; external API runs needed network access and explicit URL configuration. JSONPlaceholder returned HTTP 201 for all three boundary requests, so a separate local validating API was added. The locator exercise checks deliberately broken selectors and candidate locators but does not perform AI-powered repair. SQL was executed using PGlite, not native PostgreSQL. For the detailed reflection, see [docs/ai-tool-reflection.md](docs/ai-tool-reflection.md).
 
-GitHub publication is pending your review. The local repository is initialized; no remote or commit has been created.
+The project is published at [GitHub](https://github.com/a7b0hishek/EMI-Calculator-QA-Automation). The initial assessment commit was pushed to the `main` branch.
