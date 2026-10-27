@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#edf5f1">
+    <meta name="description" content="Estimate your monthly loan EMI and understand your repayment split.">
+    <title>Loan EMI Dashboard | Clearfin</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="/vendor/chart.umd.js"></script>
+    <script type="module" src="/js/dashboard.js"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="Clearfin home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" focusable="false"><rect x="5" y="3" width="14" height="18" rx="3"></rect><path d="M8 7h8M8 11h2m4 0h2M8 15h2m4 0h2M8 18h2m4 0h2"></path></svg>
+        </span>
+        <span>Clearfin</span>
+      </a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <a class="nav-link is-current" href="/" aria-current="page">Calculator</a>
+        <a class="nav-link" href="#how-it-works">How it works</a>
+      </nav>
+      <a class="header-cta" href="#loan-form">Plan your loan <span aria-hidden="true">↗</span></a>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="page-title">
+        <p class="eyebrow"><span aria-hidden="true">✳</span> Plan smarter, borrow better</p>
+        <h1 id="page-title">Know your EMI.<br><span>Own your next move.</span></h1>
+        <p class="hero-copy">Adjust your loan details and get a clear monthly repayment estimate in seconds.</p>
+      </section>
+
+      <section class="calculator-card" aria-label="Loan EMI calculator">
+        <div class="form-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="section-kicker">Loan details</p>
+              <h2>Shape your repayment plan</h2>
+            </div>
+            <span class="estimate-badge"><span aria-hidden="true"></span> Estimate</span>
+          </div>
+
+          <form id="loan-form" novalidate data-testid="loan-form">
+            <div class="field-group">
+              <div class="field-heading">
+                <label for="loan-amount">Loan amount <span class="field-unit">(INR)</span></label>
+                <div class="number-entry">
+                  <span aria-hidden="true">₹</span>
+                <input id="loan-amount" name="loanAmount" type="number" inputmode="decimal" min="100000" max="10000000" step="1" value="2500000" required aria-describedby="loan-amount-help" data-testid="loan-amount">
+                </div>
+              </div>
+              <input class="range-input" type="range" min="100000" max="10000000" step="100000" value="2500000" aria-label="Adjust loan amount" aria-controls="loan-amount" data-range-for="loan-amount" data-testid="loan-amount-range">
+              <div class="range-ends" id="loan-amount-help"><span>₹1 lakh</span><span>₹1 crore</span></div>
+            </div>
+
+            <div class="field-group">
+              <div class="field-heading">
+                <label for="interest-rate">Annual interest rate</label>
+                <div class="number-entry number-entry-small">
+                  <input id="interest-rate" name="annualRate" type="number" inputmode="decimal" min="0" max="30" step="0.01" value="8.5" required aria-describedby="interest-rate-help" data-testid="interest-rate">
+                  <span aria-hidden="true">%</span>
+                </div>
+              </div>
+              <input class="range-input" type="range" min="0" max="30" step="0.1" value="8.5" aria-label="Adjust annual interest rate" aria-controls="interest-rate" data-range-for="interest-rate" data-testid="interest-rate-range">
+              <div class="range-ends" id="interest-rate-help"><span>0% (interest-free)</span><span>30%</span></div>
+            </div>
+
+            <div class="field-group">
+              <div class="field-heading">
+                <label for="tenure-years">Loan tenure</label>
+                <div class="number-entry number-entry-small">
+                  <input id="tenure-years" name="tenureYears" type="number" inputmode="numeric" min="1" max="30" step="1" value="20" required aria-describedby="tenure-help" data-testid="tenure-years">
+                  <span>years</span>
+                </div>
+              </div>
+              <input class="range-input" type="range" min="1" max="30" step="1" value="20" aria-label="Adjust loan tenure" aria-controls="tenure-years" data-range-for="tenure-years" data-testid="tenure-range">
+              <div class="range-ends" id="tenure-help"><span>1 year</span><span>30 years</span></div>
+            </div>
+
+            <div class="form-actions">
+              <button class="button button-primary" type="submit" data-testid="calculate-emi">Calculate EMI <span aria-hidden="true">→</span></button>
+              <p class="form-note">A quick estimate to help plan your next step.</p>
+            </div>
+            <p class="validation-message" id="validation-message" role="alert" aria-live="assertive" tabindex="-1" data-testid="validation-message" hidden></p>
+          </form>
+        </div>
+
+        <aside class="results-panel" aria-label="Loan repayment estimate" data-testid="results-panel">
+          <p class="section-kicker section-kicker-light">Your monthly EMI</p>
+          <p class="emi-value" id="monthly-emi" aria-live="polite" data-testid="monthly-emi">—</p>
+          <p class="emi-caption" id="emi-caption">Calculate to see your estimate</p>
+
+          <div class="chart-section">
+            <div class="chart-wrap" data-testid="chart-container">
+              <canvas id="repayment-chart" role="img" aria-label="Pie chart comparing loan principal and total interest"></canvas>
+              <div class="chart-empty" id="chart-empty" aria-hidden="true">Your<br>breakdown<br>will appear here</div>
+            </div>
+            <ul class="legend-list" aria-label="Payment breakdown">
+              <li><span class="legend-label"><span class="legend-dot principal-dot" aria-hidden="true"></span>Principal</span><strong id="principal-total" data-testid="principal-total">—</strong></li>
+              <li><span class="legend-label"><span class="legend-dot interest-dot" aria-hidden="true"></span>Total interest</span><strong id="interest-total" data-testid="interest-total">—</strong></li>
+            </ul>
+          </div>
+          <p class="chart-summary" id="chart-summary" aria-live="polite" data-testid="chart-summary">Enter your details to view the principal and interest split.</p>
+
+          <div class="payable-row"><span>Total amount payable</span><strong id="total-payment" data-testid="total-payment">—</strong></div>
+          <a class="button button-secondary is-disabled" id="report-link" aria-disabled="true" data-testid="report-link">View repayment details <span aria-hidden="true">→</span></a>
+          <p class="disclaimer">Indicative estimate only. Actual lender rates and charges may vary.</p>
+        </aside>
+      </section>
+
+      <section class="how-it-works" id="how-it-works" aria-labelledby="how-title">
+        <div>
+          <p class="section-kicker">A clearer way to plan</p>
+          <h2 id="how-title">Your estimate, at a glance.</h2>
+        </div>
+        <p>EMI is the fixed monthly payment that repays your principal and interest over the selected loan tenure. Change any input and calculate again to refresh your estimate.</p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <strong>Built for clarity, not complexity.</strong>
+      <ul><li><span>01</span> Clear estimates</li><li><span>02</span> Instant calculations</li><li><span>03</span> No account needed</li></ul>
+    </footer>
+  </body>
+</html>

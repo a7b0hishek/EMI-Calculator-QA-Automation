@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#edf5f1">
+    <meta name="description" content="Review your loan EMI estimate and repayment totals.">
+    <title>Repayment details | Clearfin</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script type="module" src="/js/report.js"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="Clearfin home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" focusable="false"><rect x="5" y="3" width="14" height="18" rx="3"></rect><path d="M8 7h8M8 11h2m4 0h2M8 15h2m4 0h2M8 18h2m4 0h2"></path></svg>
+        </span>
+        <span>Clearfin</span>
+      </a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <a class="nav-link" href="/">Calculator</a>
+        <span class="nav-link is-current" aria-current="page">Repayment details</span>
+      </nav>
+      <a class="header-cta" href="/">Back to calculator <span aria-hidden="true">↗</span></a>
+    </header>
+
+    <main class="report-main">
+      <section class="report-intro" aria-labelledby="report-title">
+        <p class="eyebrow"><span aria-hidden="true">✳</span> Your repayment snapshot</p>
+        <h1 id="report-title">The details behind<br><span>your monthly plan.</span></h1>
+        <p class="hero-copy">A clear view of your inputs and estimated repayment totals.</p>
+      </section>
+
+      <div class="report-error" id="report-error" role="alert" data-testid="report-error" hidden>
+        <h2>We could not load this estimate</h2>
+        <p id="report-error-message">Return to the calculator and submit valid loan details.</p>
+        <a class="button button-primary" href="/">Back to calculator <span aria-hidden="true">→</span></a>
+      </div>
+
+      <section class="report-card" id="report-card" aria-labelledby="report-card-title" data-testid="report-card" hidden>
+        <div class="report-overview">
+          <p class="section-kicker section-kicker-light">Estimated monthly EMI</p>
+          <h2 id="report-card-title" data-testid="report-monthly-emi">—</h2>
+          <p id="report-tenure-caption">—</p>
+        </div>
+        <div class="report-details">
+          <h3>Your loan details</h3>
+          <dl class="detail-list">
+            <div><dt>Loan amount</dt><dd id="report-principal" data-testid="report-principal">—</dd></div>
+            <div><dt>Annual interest rate</dt><dd id="report-rate" data-testid="report-rate">—</dd></div>
+            <div><dt>Loan tenure</dt><dd id="report-tenure" data-testid="report-tenure">—</dd></div>
+            <div><dt>Total principal</dt><dd id="report-total-principal" data-testid="report-total-principal">—</dd></div>
+            <div><dt>Total interest</dt><dd id="report-interest" data-testid="report-interest">—</dd></div>
+            <div class="detail-total"><dt>Total amount payable</dt><dd id="report-total-payment" data-testid="report-total-payment">—</dd></div>
+          </dl>
+          <p class="rounding-note">Amounts are calculated at full precision and rounded to the nearest paisa for display.</p>
+          <a class="button button-secondary report-back" href="/">← Edit loan details</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer report-footer">
+      <strong>Built for clarity, not complexity.</strong>
+      <p>Indicative estimate only. Actual lender rates and charges may vary.</p>
+    </footer>
+  </body>
+</html>

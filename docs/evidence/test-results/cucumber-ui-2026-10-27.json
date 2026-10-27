@@ -1,0 +1,686 @@
+[
+  {
+    "description": "  As a borrower\n  I want to calculate a loan EMI from the dashboard\n  So that I can understand the monthly and total repayment amounts",
+    "elements": [
+      {
+        "description": "",
+        "id": "loan-emi-dashboard;dashboard-loads-with-the-expected-heading-and-loan-controls",
+        "keyword": "Scenario",
+        "line": 7,
+        "name": "Dashboard loads with the expected heading and loan controls",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 599385500
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 151093249
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 8,
+            "name": "the loan dashboard is open",
+            "match": {
+              "location": "tests/step-definitions/dashboard.steps.js:5"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 18454125
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 9,
+            "name": "the dashboard heading and loan controls are visible",
+            "match": {
+              "location": "tests/step-definitions/dashboard.steps.js:21"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 113697666
+            },
+            "keyword": "After",
+            "hidden": true
+          }
+        ],
+        "tags": [
+          {
+            "name": "@ui",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "loan-emi-dashboard;a-positive-interest-loan-displays-independently-calculated-figures",
+        "keyword": "Scenario",
+        "line": 11,
+        "name": "A positive-interest loan displays independently calculated figures",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 647184166
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 174906332
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 12,
+            "name": "the loan dashboard is open",
+            "match": {
+              "location": "tests/step-definitions/dashboard.steps.js:5"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 500671957
+            },
+            "arguments": [],
+            "keyword": "When ",
+            "line": 13,
+            "name": "I calculate a loan of 2500000 INR at 8.5% for 20 years",
+            "match": {
+              "location": "tests/step-definitions/dashboard.steps.js:10"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 12650666
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 14,
+            "name": "the displayed loan figures match the independent calculation",
+            "match": {
+              "location": "tests/step-definitions/dashboard.steps.js:33"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 91754457
+            },
+            "keyword": "After",
+            "hidden": true
+          }
+        ],
+        "tags": [
+          {
+            "name": "@ui",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "loan-emi-dashboard;a-zero-interest-loan-is-calculated-correctly",
+        "keyword": "Scenario",
+        "line": 16,
+        "name": "A zero-interest loan is calculated correctly",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 587594042
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 133878916
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 17,
+            "name": "the loan dashboard is open",
+            "match": {
+              "location": "tests/step-definitions/dashboard.steps.js:5"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 114275000
+            },
+            "arguments": [],
+            "keyword": "When ",
+            "line": 18,
+            "name": "I calculate a loan of 120000 INR at 0% for 1 year",
+            "match": {
+              "location": "tests/step-definitions/dashboard.steps.js:10"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 18709916
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 19,
+            "name": "the displayed loan figures match the independent calculation",
+            "match": {
+              "location": "tests/step-definitions/dashboard.steps.js:33"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 94239333
+            },
+            "keyword": "After",
+            "hidden": true
+          }
+        ],
+        "tags": [
+          {
+            "name": "@ui",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "loan-emi-dashboard;the-chart-shows-positive-principal-and-interest-values",
+        "keyword": "Scenario",
+        "line": 21,
+        "name": "The chart shows positive principal and interest values",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 609937542
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 163871833
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 22,
+            "name": "the loan dashboard is open",
+            "match": {
+              "location": "tests/step-definitions/dashboard.steps.js:5"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 488097458
+            },
+            "arguments": [],
+            "keyword": "When ",
+            "line": 23,
+            "name": "I calculate a loan of 2500000 INR at 8.5% for 20 years",
+            "match": {
+              "location": "tests/step-definitions/dashboard.steps.js:10"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 6409375
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 24,
+            "name": "the chart is visible and its principal and interest values are positive",
+            "match": {
+              "location": "tests/step-definitions/dashboard.steps.js:42"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 93420124
+            },
+            "keyword": "After",
+            "hidden": true
+          }
+        ],
+        "tags": [
+          {
+            "name": "@ui",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "loan-emi-dashboard;missing-input-feedback-clears-the-previous-calculation-and-chart-summary",
+        "keyword": "Scenario",
+        "line": 26,
+        "name": "Missing input feedback clears the previous calculation and chart summary",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 771533042
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 203353625
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 27,
+            "name": "the loan dashboard is open",
+            "match": {
+              "location": "tests/step-definitions/dashboard.steps.js:5"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 489109875
+            },
+            "arguments": [],
+            "keyword": "When ",
+            "line": 28,
+            "name": "I calculate a loan of 2500000 INR at 8.5% for 20 years",
+            "match": {
+              "location": "tests/step-definitions/dashboard.steps.js:10"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 383578292
+            },
+            "arguments": [],
+            "keyword": "And ",
+            "line": 29,
+            "name": "I clear the loan amount and calculate again",
+            "match": {
+              "location": "tests/step-definitions/dashboard.steps.js:16"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 8902500
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 30,
+            "name": "validation feedback is shown and stale results are cleared",
+            "match": {
+              "location": "tests/step-definitions/dashboard.steps.js:53"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 104024166
+            },
+            "keyword": "After",
+            "hidden": true
+          }
+        ],
+        "tags": [
+          {
+            "name": "@ui",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "loan-emi-dashboard",
+    "line": 2,
+    "keyword": "Feature",
+    "name": "Loan EMI dashboard",
+    "tags": [
+      {
+        "name": "@ui",
+        "line": 1
+      }
+    ],
+    "uri": "tests/features/dashboard.feature"
+  },
+  {
+    "description": "  As a borrower\n  I want to review the details behind my EMI estimate\n  So that I can confirm the submitted loan inputs and repayment totals",
+    "elements": [
+      {
+        "description": "",
+        "id": "loan-repayment-report;report-displays-the-submitted-loan-inputs-and-calculated-results",
+        "keyword": "Scenario",
+        "line": 7,
+        "name": "Report displays the submitted loan inputs and calculated results",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 609394250
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 155727624
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 8,
+            "name": "the loan dashboard is open",
+            "match": {
+              "location": "tests/step-definitions/dashboard.steps.js:5"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 425593750
+            },
+            "arguments": [],
+            "keyword": "When ",
+            "line": 9,
+            "name": "I calculate a loan of 2500000 INR at 8.5% for 20 years",
+            "match": {
+              "location": "tests/step-definitions/dashboard.steps.js:10"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 124478374
+            },
+            "arguments": [],
+            "keyword": "And ",
+            "line": 10,
+            "name": "I open repayment details",
+            "match": {
+              "location": "tests/step-definitions/report.steps.js:5"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 4869584
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 11,
+            "name": "the report shows the submitted loan inputs and independent calculation",
+            "match": {
+              "location": "tests/step-definitions/report.steps.js:25"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 89740667
+            },
+            "keyword": "After",
+            "hidden": true
+          }
+        ],
+        "tags": [
+          {
+            "name": "@ui",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "loan-repayment-report;report-navigation-returns-to-the-dashboard",
+        "keyword": "Scenario",
+        "line": 13,
+        "name": "Report navigation returns to the dashboard",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 591092125
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 174939583
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 14,
+            "name": "the loan dashboard is open",
+            "match": {
+              "location": "tests/step-definitions/dashboard.steps.js:5"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 400376707
+            },
+            "arguments": [],
+            "keyword": "When ",
+            "line": 15,
+            "name": "I calculate a loan of 2500000 INR at 8.5% for 20 years",
+            "match": {
+              "location": "tests/step-definitions/dashboard.steps.js:10"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 144728209
+            },
+            "arguments": [],
+            "keyword": "And ",
+            "line": 16,
+            "name": "I open repayment details",
+            "match": {
+              "location": "tests/step-definitions/report.steps.js:5"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 76651625
+            },
+            "arguments": [],
+            "keyword": "And ",
+            "line": 17,
+            "name": "I return to the calculator from the report",
+            "match": {
+              "location": "tests/step-definitions/report.steps.js:10"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 4156708
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 18,
+            "name": "the loan dashboard is visible again",
+            "match": {
+              "location": "tests/step-definitions/report.steps.js:37"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 120893041
+            },
+            "keyword": "After",
+            "hidden": true
+          }
+        ],
+        "tags": [
+          {
+            "name": "@ui",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "loan-repayment-report;missing-report-query-parameters-show-an-error",
+        "keyword": "Scenario",
+        "line": 20,
+        "name": "Missing report query parameters show an error",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 668027374
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 114781375
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 21,
+            "name": "the report is opened without loan query parameters",
+            "match": {
+              "location": "tests/step-definitions/report.steps.js:15"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 5092791
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 22,
+            "name": "the report shows a clear error instead of calculated results",
+            "match": {
+              "location": "tests/step-definitions/report.steps.js:42"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 118804249
+            },
+            "keyword": "After",
+            "hidden": true
+          }
+        ],
+        "tags": [
+          {
+            "name": "@ui",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "loan-repayment-report;invalid-report-query-parameters-show-an-error",
+        "keyword": "Scenario",
+        "line": 24,
+        "name": "Invalid report query parameters show an error",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 743911667
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 177589624
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 25,
+            "name": "the report is opened with invalid loan parameters",
+            "match": {
+              "location": "tests/step-definitions/report.steps.js:20"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 6221375
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 26,
+            "name": "the report shows a clear error instead of calculated results",
+            "match": {
+              "location": "tests/step-definitions/report.steps.js:42"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 123571249
+            },
+            "keyword": "After",
+            "hidden": true
+          }
+        ],
+        "tags": [
+          {
+            "name": "@ui",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "loan-repayment-report",
+    "line": 2,
+    "keyword": "Feature",
+    "name": "Loan repayment report",
+    "tags": [
+      {
+        "name": "@ui",
+        "line": 1
+      }
+    ],
+    "uri": "tests/features/report.feature"
+  }
+]
