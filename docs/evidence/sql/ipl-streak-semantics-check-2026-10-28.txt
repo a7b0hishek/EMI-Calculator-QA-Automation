@@ -1,0 +1,3 @@
+PGlite 0.5.12 ad hoc query semantics check (test-only Mira Fixture rows; not part of saved schema):
+[[1,3,3],[5,7,3]]
+Verified two separate maximal three-appearance runs; the low-score appearance in match 4 splits them.

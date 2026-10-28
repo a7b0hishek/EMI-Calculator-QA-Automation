@@ -1,10 +1,17 @@
 # Local assessment evidence
 
-These files are copies of real local test and query outputs. The generated originals remain under Git-ignored `reports/`; no output was fabricated. This workspace has no Git repository configured, so these files are prepared for review but have not been staged or pushed.
+These files are copies of real local test and query outputs. The generated originals remain under Git-ignored `reports/`; no output was fabricated. The project has a Git repository configured; evidence changes remain in the working tree until reviewed and committed.
 
 ## Test reports
 
-Fresh execution evidence from 2026-10-27 is preserved under date-stamped names below; older evidence copies remain unchanged.
+Fresh execution evidence from 2026-10-28 is preserved under date-stamped names below; earlier evidence copies remain unchanged.
+
+- `test-results/cucumber-default-suite-2026-10-28.json`: latest `npm test`, **23 scenarios and 121 steps passed** (UI, external JSONPlaceholder, and local validation API; excludes intentional broken locators).
+- `test-results/cucumber-ui-2026-10-28.json`: latest UI-only run, **9 scenarios and 46 steps passed**.
+- `test-results/cucumber-jsonplaceholder-api-2026-10-28.json`: external boundary suite, **3 scenarios and 18 steps passed**. JSONPlaceholder returned HTTP 201 for the 10,000-character title, unusual-symbol title, and missing-`userId` payload. These are accepted-and-echoed responses, not validation rejections.
+- `test-results/cucumber-local-validation-api-2026-10-28.json`: local validation suite, **11 scenarios and 57 steps passed**. It verifies 201 for valid payloads, 400 JSON errors for missing `userId`, overlong/unsupported titles and malformed JSON, and 413 for oversized JSON. Invalid responses contain no created-post ID.
+
+The combined report and the separate API reports were copied byte-for-byte from their generated `reports/` files and parsed to confirm scenario counts and results.
 
 - `test-results/cucumber-default-suite-2026-10-27.json`: latest `npm test`, **23 scenarios and 121 steps passed** (includes UI, external JSONPlaceholder, and local validation API; excludes the intentionally broken locator feature).
 - `test-results/cucumber-ui-2026-10-27.json`: latest UI-only run, **9 scenarios and 46 steps passed**.
@@ -28,4 +35,8 @@ The four failure screenshots are in `screenshots/`. The Cucumber JSON report als
 The screenshots below were captured from live query results executed using temporary PGlite 0.5.12, a PostgreSQL-compatible WASM database. They show 5 transfer pairs and 2 sample streaks. Native PostgreSQL/`psql` was unavailable, and the IPL fixtures are synthetic rather than a complete official dataset.
 
 - [Reciprocal transfers SQL screenshot](sql/reciprocal-transfers.png)
-- [IPL 2024 streaks SQL screenshot](sql/ipl-2024-streaks.png)
+- [Latest illustrative IPL streak SQL screenshot](sql/ipl-2024-streaks-sample-2026-10-28.png)
+- [Earlier IPL streak screenshot](sql/ipl-2024-streaks.png) (kept as historical evidence)
+- `sql/ipl-sql-output-2026-10-28.txt`: fresh PGlite output for both queries; the IPL names and results are illustrative fixtures.
+- `sql/ipl-streak-semantics-check-2026-10-28.txt`: test-only in-memory case confirming two maximal runs for one player, split by a low-scoring appearance.
+- `sql/cricsheet-ipl-2024-coverage-2026-10-28.txt`: actual source archive audit. Cricsheet's JSON archive contained 71 IPL match files dated 2024; league match numbers 63, 66, and 70 were absent, so no complete-season streak result is claimed.

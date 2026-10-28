@@ -1,6 +1,8 @@
--- PostgreSQL dialect.
--- A match with no player-innings rows is a non-appearance, not a zero score.
--- The match-number gap therefore breaks any streak across that match.
+-- PostgreSQL dialect. Current rows are illustrative synthetic fixtures.
+-- Consecutive means successive player batting appearances, ordered by season
+-- match number; calendar-date gaps and matches without that player's score row
+-- do not break the sequence. A low-scoring appearance does break a streak.
+-- Output groups maximal runs, not overlapping three-match windows.
 
 WITH player_match_totals AS (
     -- Aggregate every innings row before applying the per-match threshold.
@@ -23,18 +25,28 @@ WITH player_match_totals AS (
         match.match_date,
         player.player_id,
         player.player_name
-), qualifying_matches AS (
-    SELECT *
-    FROM player_match_totals
-    WHERE runs_in_match >= 30
-), numbered_matches AS (
-    -- For consecutive match numbers, match_number - row_number is constant.
-    -- A low score or non-appearance leaves a match-number gap and starts a new group.
+), player_appearances AS (
+    -- Number every batting appearance before filtering so a low score leaves a
+    -- gap and splits a streak, while a non-appearance adds no player sequence row.
     SELECT
-        qualifying_matches.*,
-        match_number - ROW_NUMBER() OVER (
+        player_match_totals.*,
+        ROW_NUMBER() OVER (
             PARTITION BY player_id, season_year
             ORDER BY match_number
+        ) AS appearance_number
+    FROM player_match_totals
+), qualifying_matches AS (
+    SELECT *
+    FROM player_appearances
+    WHERE runs_in_match >= 30
+), numbered_matches AS (
+    -- For consecutive qualifying appearances, appearance_number - row_number
+    -- is constant. Low-scoring appearances were included in the earlier count.
+    SELECT
+        qualifying_matches.*,
+        appearance_number - ROW_NUMBER() OVER (
+            PARTITION BY player_id, season_year
+            ORDER BY appearance_number
         ) AS streak_group
     FROM qualifying_matches
 ), streaks AS (

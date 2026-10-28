@@ -104,9 +104,9 @@ INSERT INTO section_a.ipl_player_innings
     (innings_id, match_id, player_id, innings_number, runs_scored)
 VALUES
     (10001, 101, 1, 1, 30),
-    (10002, 102, 1, 1, 44),
-    (10003, 103, 1, 1, 16),
-    (10004, 103, 1, 2, 15), -- synthetic split-innings fixture; match total is 31
+    (10002, 103, 1, 1, 44),
+    (10003, 105, 1, 1, 16),
+    (10004, 105, 1, 2, 15), -- synthetic split-innings fixture; match total is 31
     (10005, 104, 2, 1, 30),
     (10006, 105, 2, 1, 32),
     (10007, 106, 2, 1, 63),

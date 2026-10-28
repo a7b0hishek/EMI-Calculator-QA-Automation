@@ -57,31 +57,48 @@ The 110.01 return, the return 24 hours and one second later, and the 90 → 100 
 
 ### Schema and streak rule
 
-- `ipl_matches` records every match in the season's match-number sequence and its date. For a real analysis, load the complete official season schedule into this table, even for matches a player did not appear in.
+- `ipl_matches` records each included match and its season match number/date.
 - `ipl_players` maps player IDs to names.
-- `ipl_player_innings` records an appearance's innings score. The query first sums all rows for a player and match, then applies the 30-run threshold.
-- No innings row for a player in a match means that player did not appear. A missing appearance and a recorded match total below 30 both break a streak; the query does not invent a zero-score row.
+- `ipl_player_innings` records a batting appearance's innings score. The query first sums all rows for a player and match, then applies the 30-run threshold.
+- No innings row for a player in a match means that player did not have a batting appearance in that match; the query does not invent a zero-score row.
 
-The query keeps only player-match totals of at least 30, then groups rows where the match numbers are consecutive using `match_number - ROW_NUMBER()`. Three qualifying scores separated by a low score or a non-appearance therefore cannot form one streak. It returns maximal streaks of length three or more, with player, season, start/end match numbers, start/end dates, and length.
+The query first numbers every player batting appearance by season match number, then filters totals below 30. A low-scoring appearance leaves a gap in that player's sequence and breaks a streak. A season match with no batting appearance for that player does not add a sequence row, so consecutive means consecutive player appearances rather than consecutive global IPL match numbers or calendar dates. It returns maximal streaks of length three or more, with player, season, first/last match numbers and dates, and streak length.
 
-The sample contains three fictional players and seven consecutive illustrative match rows. Asha Sample has 30, 44, and 31 runs in matches 1–3; the 31 in match 3 is represented by two innings rows (16 + 15) solely to exercise aggregation. That two-innings-in-one-match fixture is intentionally synthetic and is not presented as a typical IPL scorecard. Kabir Sample scores at least 30 in four straight matches (4–7). Dev Sample has low-scoring and absent matches between qualifying scores and has no qualifying streak.
+If a player has multiple qualifying streaks, each maximal run is a separate result. A four-appearance run is one four-match result rather than overlapping three-match windows.
+
+The sample contains three fictional players and seven illustrative match rows. Asha Sample scores 30, 44, and 31 in matches 1, 3, and 5; those are three consecutive player appearances despite intervening season match numbers. The 31 in match 5 is represented by two innings rows (16 + 15) to exercise aggregation. This split is intentionally synthetic and is not presented as a typical IPL scorecard. Kabir Sample scores at least 30 in four consecutive personal appearances (matches 4–7). Dev Sample has low-scoring appearances that break his run and has no qualifying streak.
 
 ### Expected output
 
 | Player | Start match | End match | Start date | End date | Streak length |
 |---|---:|---:|---|---|---:|
-| Asha Sample | 1 | 3 | 2024-03-22 | 2024-03-24 | 3 |
+| Asha Sample | 1 | 5 | 2024-03-22 | 2024-03-26 | 3 |
 | Kabir Sample | 4 | 7 | 2024-03-25 | 2024-03-28 | 4 |
 
 Dev Sample should not appear in the result.
 
+### Review of the real 2024 data source
+
+The established source checked for a real-season import was the [Cricsheet IPL JSON archive](https://cricsheet.org/downloads/ipl_json.zip). Cricsheet identifies JSON as its primary match-data format and licenses its JSON data under the [Open Data Commons Attribution License 1.0](https://opendatacommons.org/licenses/by/1.0/). Relevant nested fields include `info.event.name`, `info.dates`, `info.event.match_number`, `info.teams`, `info.players`, and each innings' `overs[].deliveries[]` fields such as `batter` and `runs.batter`.
+
+Preprocessing for the coverage audit selects JSON records whose event name is `Indian Premier League` and whose first `info.dates` value is in 2024. On the archive retrieved 2026-10-28 (SHA-256 recorded in the evidence file), this selected **71 match files**. Only 67 of the 70 numbered league matches were present; match numbers **63, 66, and 70** were absent. The archive also contained four 2024 playoff records without a numeric `event.match_number`. The [BCCI 2024 schedule](https://documents.bcci.tv/bcci/documents/1711346895837_TATA%20IPL%202024%20Schedule%20F.pdf) lists 74 matches, so the available Cricsheet archive is incomplete for a full-season analysis.
+
+Because missing matches can change a consecutive-appearance result, these records were **not** mixed into the fixtures or presented as full-season statistics. The existing fictional sample is retained and explicitly labeled illustrative. No real-player streak result is claimed. Recheck current source coverage with:
+
+```sh
+python3 sql/audit-cricsheet-ipl-2024.py
+```
+
+The audit requires Python 3 and `curl` (used with normal certificate verification for the archive download). To audit a previously downloaded archive instead, pass `--archive /path/to/ipl_json.zip`. To reproduce the SQL output in this project, load the fixture schema and run `sql/ipl-2024-streaks.sql` using the commands above. The actual PGlite output and coverage audit are preserved under `docs/evidence/sql/`.
+
 ## Verification status and evidence
 
-The project environment has no native `psql` or PostgreSQL server binaries, and Docker/Podman are unavailable. The exact `schema.sql` and both query files were nevertheless executed in a temporary **PGlite 0.5.12** PostgreSQL-compatible WASM database. The schema loaded successfully; the transfer query returned five rows and the streak query returned two rows exactly as listed above. This validates execution in PGlite, but is not a claim that a native PostgreSQL server was used.
+The project environment has no native `psql` or PostgreSQL server binaries, and Docker/Podman are unavailable. The exact `schema.sql` and both query files were nevertheless executed in a temporary **PGlite 0.5.12** PostgreSQL-compatible WASM database. The schema loaded successfully; the transfer query returned five rows and the streak query returned two rows exactly as listed above. A separate in-memory test-only player with two three-appearance runs returned two distinct maximal streak rows (matches 1–3 and 5–7), confirming low-score break and multiple-streak behavior without changing the saved fixture. This validates execution in PGlite, but is not a claim that a native PostgreSQL server was used.
 
-The screenshots below were captured from those live query result rows in headless Chrome. The originals remain under the Git-ignored `reports/sql/` directory; copies for submission are in `docs/evidence/sql/`:
+The 2026-10-28 streak screenshot was captured from the actual PGlite query rows in headless Chrome. The earlier SQL screenshots remain preserved; the older streak screenshot predates the player-appearance adjacency definition.
 
 - [Reciprocal transfer query output](../docs/evidence/sql/reciprocal-transfers.png)
-- [IPL scoring streak query output](../docs/evidence/sql/ipl-2024-streaks.png)
+- [Latest IPL sample streak query output](../docs/evidence/sql/ipl-2024-streaks-sample-2026-10-28.png)
+- [Earlier IPL streak screenshot](../docs/evidence/sql/ipl-2024-streaks.png)
 
 For a native PostgreSQL check, run the setup and `psql` commands above against a dedicated PostgreSQL database.

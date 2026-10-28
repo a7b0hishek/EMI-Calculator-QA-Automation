@@ -21,8 +21,8 @@ Feature: Local POST /api/posts validation
     When I submit it to the local posts API
     Then the response is an HTTP 400 JSON validation error for "title" containing "at most 200 characters"
 
-  Scenario: A title containing an unsupported symbol is rejected
-    Given a local post payload whose title contains an unsupported symbol
+  Scenario: A title containing @ is rejected
+    Given a local post payload whose title contains @
     When I submit it to the local posts API
     Then the response is an HTTP 400 JSON validation error for "title" containing "unsupported characters"
 

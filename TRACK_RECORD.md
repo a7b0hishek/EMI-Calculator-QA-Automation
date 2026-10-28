@@ -130,3 +130,35 @@ Record every project update here with its date, scope, and verification performe
 - Added `https://github.com/a7b0hishek/EMI-Calculator-QA-Automation` as `origin`. `git ls-remote --heads origin` returned no branch heads before the first push, so the remote had no existing history to overwrite.
 - Pushed `main` with upstream tracking. The remote `refs/heads/main` hash matched initial commit `065466f4f1fd11aae10763a5f2b4c38b81fdddc6`.
 - Corrected the README's publication status to show the repository URL and pushed branch. This follow-up documentation correction does not change application, test, or SQL behavior.
+
+## 2026-10-28 — Dashboard image correction
+
+- Removed the README preview that pointed to a different dashboard screenshot, per the user's clarification. The screenshot shown inline in chat is not exposed as a local file in the accessible workspace or attachment/temp folders, so it could not be copied into the repository. The requested original image preview remains pending an accessible image file.
+- No application or test files changed; tests were not rerun. This README/track-record update remains local and was not committed or pushed.
+
+## 2026-10-28 — Add original dashboard screenshot to README
+
+- Added the original dashboard image at `docs/evidence/screenshots/Dashboard.png` to the Dashboard section of `README.md`. Inspected the image and confirmed it matches the screenshot shared by the user; it is a 2880 × 1800 PNG.
+- No application or test files changed; tests were not rerun. The image and documentation changes are local and were not committed or pushed.
+
+## 2026-10-28 — Document EMI calculation in README
+
+- Expanded the README calculation notes with the implemented EMI and zero-interest formulas, input bounds, rounding policy, and an example using ₹12,00,000 at 8% for 15 years. Independently evaluated the example formula with Node.js; it yields EMI ₹11,467.825011…, total payment ₹20,64,208.50, and total interest ₹8,64,208.50 at display precision.
+- Documentation only; no application or test files changed and no test suite was run. Changes remain local and were not committed or pushed.
+
+## 2026-10-28 — Add calculation screenshot below dashboard
+
+- Added `docs/evidence/screenshots/Calculation.png` directly below the dashboard screenshot in `README.md`. Inspected the image and confirmed it shows the calculated EMI, principal/interest chart, and total payment.
+- Verified the Markdown path resolves to the existing image and `git diff --check` is clean. No tests were run; changes remain local and were not committed or pushed.
+
+## 2026-10-28 — A3 API assertions and A4 IPL source audit
+
+- Inspected Git status, A3 features/steps/helpers/configuration/reports, SQL schema/query, README, evidence, and current uncommitted documentation before editing. Preserved the existing README and TRACK_RECORD changes and both stash entries. No `.env` contents were read; no dependency files or Git history were changed, and nothing was pushed.
+- Updated the local A3 unsupported-title case to use `@`. Strengthened ordinary validation and parser-error assertions to require a 4xx JSON response without a created-post `id`. The server implementation already enforced the requested rules, so no application/API logic was rewritten. External JSONPlaceholder scenarios remain a separate suite.
+- Baseline `npm test` passed **23 scenarios / 121 steps** before edits. After edits, `APP_BASE_URL=http://127.0.0.1:3000 npm run test:api:local` passed **11 / 57**, `JSONPLACEHOLDER_BASE_URL=https://jsonplaceholder.typicode.com npm run test:api` passed **3 / 18**, and the full configured `npm test` passed **23 / 121**. The external service returned HTTP 201 and echoed each of the long-title, unusual-symbol, and missing-`userId` payloads. The local route returned 201 for valid payloads; 400 with the expected JSON errors for missing `userId`, a title longer than 200 characters, a title containing `@`, malformed JSON, and other invalid fields; and 413 for an oversized body.
+- Reviewed Cricsheet's official IPL JSON archive and ODbL attribution terms. The archive downloaded on 2026-10-28 contained 1,243 JSON files but only 71 IPL match files dated 2024, with numbered league matches 63, 66, and 70 absent; four playoff files lacked numeric event match numbers. The BCCI schedule lists 74 matches. Added `sql/audit-cricsheet-ipl-2024.py` and saved its actual output under `docs/evidence/sql/`; because this archive is incomplete for the streak question, retained the existing clearly labeled synthetic fixtures and made no real-player streak claim.
+- The audit script's first urllib download attempt failed because this environment's Python CA store rejected the certificate. Switched the downloader to `curl` with certificate verification enabled; the script's direct download then succeeded and returned the same archive SHA-256 and coverage counts as the saved audit.
+- Clarified that SQL streaks count successive batting appearances, and documented source provenance, relevant fields, license, preprocessing, missing coverage, and reproduction steps in `sql/README.md` and `README.md`.
+- Executed `sql/schema.sql`, `sql/reciprocal-transfers.sql`, and `sql/ipl-2024-streaks.sql` with temporary PGlite 0.5.12 installed under `/tmp` only. The transfer query returned 5 rows and the synthetic IPL query returned Asha Sample (three appearances in matches 1, 3, and 5) and Kabir Sample (matches 4–7). Saved the actual output at `docs/evidence/sql/ipl-sql-output-2026-10-28.txt` and captured a fresh result screenshot without overwriting the prior evidence.
+- Corrected the SQL streak sequence to number each player's batting appearances before filtering scores. This makes low-scoring appearances split runs while a match the player did not bat in adds no appearance. The sample now demonstrates consecutive personal appearances across global match-number gaps; a separate test-only PGlite case verified two disjoint maximal runs for one player.
+- Copied the three generated Cucumber reports to date-stamped evidence files and byte-verified each copy. Updated README links and the evidence index, and captured a new screenshot of the updated SQL result rows. The intentional broken-locator exercise was not run; it remains excluded from the normal suite.

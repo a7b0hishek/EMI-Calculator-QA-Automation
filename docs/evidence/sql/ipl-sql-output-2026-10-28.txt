@@ -1,0 +1,20 @@
+SQL verification — 2026-10-28
+Engine: PGlite 0.5.12 (PostgreSQL-compatible WASM database)
+Schema: sql/schema.sql
+
+Reciprocal-transfer query: 5 rows
+1001 -> 1002 | A -> B -> A | 100.00 -> 110.00
+2001 -> 2002 | C -> D -> C | 50.00 -> 50.00
+3001 -> 3002 | E -> F -> E | 100.00 -> 90.00
+6001 -> 6003 | K -> L -> K | 25.00 -> 25.00
+6002 -> 6003 | K -> L -> K | 25.00 -> 25.00
+
+Illustrative IPL streak query: 2 rows
+Asha Sample | 2024 match numbers 1 and 5 | 2024-03-22 to 2024-03-26 | 3 consecutive player appearances
+Kabir Sample | 2024 match numbers 4-7 | 2024-03-25 to 2024-03-28 | 4 matches
+
+The IPL rows are synthetic fixtures. Asha Sample's appearances in match numbers
+1, 3, and 5 demonstrate that personal appearance sequence, not consecutive
+global match numbers or calendar dates, defines adjacency. They are not
+real-player statistics or results from a complete IPL 2024 season dataset. See
+the Cricsheet coverage audit in cricsheet-ipl-2024-coverage-2026-10-28.txt.

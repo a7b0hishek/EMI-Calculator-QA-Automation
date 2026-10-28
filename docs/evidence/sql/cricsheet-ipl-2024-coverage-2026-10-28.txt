@@ -1,0 +1,8 @@
+Source: https://cricsheet.org/downloads/ipl_json.zip
+Archive SHA-256: 5757e04287179767ff8495f02902bd13812b9572ec8fa2ac1347ec2e9c6d4709
+JSON files in archive: 1243
+IPL match files dated 2024: 71
+Numbered league matches present: 67/70
+Missing league match numbers: 63, 66, 70
+Unnumbered 2024 playoff match files: 4
+Coverage is incomplete for a full-season streak result.

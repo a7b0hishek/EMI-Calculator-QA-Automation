@@ -25,11 +25,11 @@ Given("a local post payload whose title is {int} characters long", function (len
   };
 });
 
-Given("a local post payload whose title contains an unsupported symbol", function () {
+Given("a local post payload whose title contains @", function () {
   this.apiPayload = {
     userId: 7,
-    title: "Loan estimate ☃",
-    body: "The snowman symbol is outside the title character allowlist."
+    title: "Loan@estimate",
+    body: "The at sign is outside the title character allowlist."
   };
 });
 
@@ -112,6 +112,7 @@ Then("the response is an HTTP {int} JSON validation error for {string} containin
   });
   assert.equal(typeof this.apiResponse.body.error.message, "string");
   assert.ok(this.apiResponse.body.error.message.includes(messagePart));
+  assertInvalidRequestDidNotCreatePost(this.apiResponse);
 });
 
 Then("the response is an HTTP {int} JSON error with code {string} and message {string}", function (status, code, message) {
@@ -119,4 +120,11 @@ Then("the response is an HTTP {int} JSON error with code {string} and message {s
   assert.ok([400, 413].includes(status));
   assert.match(this.apiResponse.headers["content-type"] ?? "", /application\/json/i);
   assert.deepEqual(this.apiResponse.body, { error: { code, message } });
+  assertInvalidRequestDidNotCreatePost(this.apiResponse);
 });
+
+function assertInvalidRequestDidNotCreatePost(response) {
+  assert.ok(response.status >= 400 && response.status < 500, "An invalid request must not receive a success response");
+  assert.ok(response.body && typeof response.body === "object" && !Array.isArray(response.body));
+  assert.equal(Object.hasOwn(response.body, "id"), false, "An invalid request must not return a created post ID");
+}
