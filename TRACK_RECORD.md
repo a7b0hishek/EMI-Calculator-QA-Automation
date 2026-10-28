@@ -136,20 +136,6 @@ Record every project update here with its date, scope, and verification performe
 - Removed the README preview that pointed to a different dashboard screenshot, per the user's clarification. The screenshot shown inline in chat is not exposed as a local file in the accessible workspace or attachment/temp folders, so it could not be copied into the repository. The requested original image preview remains pending an accessible image file.
 - No application or test files changed; tests were not rerun. This README/track-record update remains local and was not committed or pushed.
 
-## 2026-10-28 — Add original dashboard screenshot to README
-
-- Added the original dashboard image at `docs/evidence/screenshots/Dashboard.png` to the Dashboard section of `README.md`. Inspected the image and confirmed it matches the screenshot shared by the user; it is a 2880 × 1800 PNG.
-- No application or test files changed; tests were not rerun. The image and documentation changes are local and were not committed or pushed.
-
-## 2026-10-28 — Document EMI calculation in README
-
-- Expanded the README calculation notes with the implemented EMI and zero-interest formulas, input bounds, rounding policy, and an example using ₹12,00,000 at 8% for 15 years. Independently evaluated the example formula with Node.js; it yields EMI ₹11,467.825011…, total payment ₹20,64,208.50, and total interest ₹8,64,208.50 at display precision.
-- Documentation only; no application or test files changed and no test suite was run. Changes remain local and were not committed or pushed.
-
-## 2026-10-28 — Add calculation screenshot below dashboard
-
-- Added `docs/evidence/screenshots/Calculation.png` directly below the dashboard screenshot in `README.md`. Inspected the image and confirmed it shows the calculated EMI, principal/interest chart, and total payment.
-- Verified the Markdown path resolves to the existing image and `git diff --check` is clean. No tests were run; changes remain local and were not committed or pushed.
 
 ## 2026-10-28 — A3 API assertions and A4 IPL source audit
 
