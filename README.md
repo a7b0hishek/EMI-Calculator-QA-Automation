@@ -4,11 +4,11 @@ A JavaScript ES-module assessment project with an Express-backed Loan EMI dashbo
 
 ## Dashboard
 
-![Original Loan EMI Dashboard screenshot](<img width="1440" height="900" alt="image" src="https://github.com/user-attachments/assets/c2e96ee8-4aa1-41ac-8dc7-c1036fa32407" />
-)
+![Original Loan EMI Dashboard screenshot]<img width="1440" height="900" alt="image" src="https://github.com/user-attachments/assets/c2e96ee8-4aa1-41ac-8dc7-c1036fa32407" />
 
-![Loan EMI calculation showing principal, interest, and total payment](<img width="1440" height="900" alt="image" src="https://github.com/user-attachments/assets/12f19c8d-1487-4b0e-8e29-5c4d2d77af22" />
-)
+
+![Loan EMI calculation showing principal, interest, and total payment]<img width="1440" height="900" alt="image" src="https://github.com/user-attachments/assets/12f19c8d-1487-4b0e-8e29-5c4d2d77af22" />
+
 
 ## Setup and configuration
 
