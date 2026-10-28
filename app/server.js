@@ -55,6 +55,6 @@ app.use((error, _request, response, next) => {
   });
 });
 
-app.listen(configuredPort, () => {
+app.listen(configuredPort, "0.0.0.0", () => {
   console.log(`Loan EMI Dashboard listening on port ${configuredPort}`);
 });
