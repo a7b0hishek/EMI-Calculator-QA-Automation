@@ -85,6 +85,10 @@ The IPL fixtures are illustrative sample data, not a complete official season da
 - [Reciprocal transfers SQL screenshot](docs/evidence/sql/reciprocal-transfers.png)
 - [IPL 2024 streaks SQL screenshot](docs/evidence/sql/ipl-2024-streaks.png)
 - [AI locator exercise guide](docs/ai-locator-self-healing.md) and [AI-tool reflection](docs/ai-tool-reflection.md)
+<img width="2880" height="1800" alt="Dashboard" src="https://github.com/user-attachments/assets/76ea8093-31c0-47ee-ab34-b3c71b1d790d" />
+<img width="1440" height="900" alt="Calculation" src="https://github.com/user-attachments/assets/2be19dd8-c15b-4890-8cf5-e667a84d9e6b" />
+
+
 
 Latest recorded verification on 2026-10-27: `npm test` passed 23 scenarios/121 steps; `npm run test:ui` passed 9/46; `npm run test:api` passed 3/18; and `npm run test:api:local` passed 11/57. JSONPlaceholder returned HTTP 201 for all three external cases. The SQL outputs matched the five transfer pairs and two sample streaks in PGlite. No real AI model was used for locator repair. See [TRACK_RECORD.md](TRACK_RECORD.md) for check details and setup limitations.
 
