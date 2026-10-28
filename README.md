@@ -1,4 +1,4 @@
-# Streamhub Loan EMI Dashboard
+# Loan EMI Dashboard
 
 A JavaScript ES-module assessment project with an Express-backed Loan EMI dashboard, Cucumber and Playwright automation, local and external API scenarios, PostgreSQL exercises, and execution evidence.
 
@@ -87,6 +87,8 @@ The IPL fixtures are illustrative sample data, not a complete official season da
 - [AI locator exercise guide](docs/ai-locator-self-healing.md) and [AI-tool reflection](docs/ai-tool-reflection.md)
 <img width="2880" height="1800" alt="Dashboard" src="https://github.com/user-attachments/assets/76ea8093-31c0-47ee-ab34-b3c71b1d790d" />
 <img width="1440" height="900" alt="Calculation" src="https://github.com/user-attachments/assets/2be19dd8-c15b-4890-8cf5-e667a84d9e6b" />
+<img width="1440" height="900" alt="image" src="https://github.com/user-attachments/assets/ef526a72-52a0-47ac-ab96-adf202a0abc5" />
+
 
 
 
